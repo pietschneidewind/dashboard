@@ -136,6 +136,17 @@
 </head>
 <body>
 
+<div id="password-gate" style="position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;align-items:center;justify-content:center;">
+  <div style="max-width:300px;width:100%;padding:0 20px;text-align:center;">
+    <h1 style="font-size:20px;margin:0 0 18px;">Trainingslogbuch</h1>
+    <input type="password" id="gate-password" placeholder="Passwort" style="text-align:center;margin-bottom:10px;" onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="primary" style="width:100%;padding:9px;" onclick="checkPassword()">Entsperren</button>
+    <p id="gate-error" style="color:var(--danger);font-size:12px;margin-top:10px;display:none;">Falsches Passwort.</p>
+  </div>
+</div>
+
+<div id="app-content" style="display:none;">
+
 <header>
   <div class="wrap" style="padding:0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
     <div>
@@ -483,6 +494,8 @@
     <button class="chip" onclick="document.getElementById('import-file').click()">Import</button>
     <input type="file" id="import-file" accept="application/json" style="display:none" onchange="importData(event)">
   </div>
+</div>
+
 </div>
 
 <script>
@@ -1033,6 +1046,27 @@ function renderHabitHistory(){
 }
 
 render();
+
+// --- Passwort-Gate ---
+// Passwort hier ändern: einfach den Text zwischen den Anführungszeichen ersetzen.
+const GATE_PASSWORD = 'D2m17hn"';
+
+function unlockApp(){
+  document.getElementById('password-gate').style.display = 'none';
+  document.getElementById('app-content').style.display = 'block';
+}
+function checkPassword(){
+  const val = document.getElementById('gate-password').value;
+  if(val === GATE_PASSWORD){
+    localStorage.setItem('trainingslog_unlocked', '1');
+    unlockApp();
+  } else {
+    document.getElementById('gate-error').style.display = 'block';
+  }
+}
+if(localStorage.getItem('trainingslog_unlocked') === '1'){
+  unlockApp();
+}
 </script>
 </body>
 </html>
