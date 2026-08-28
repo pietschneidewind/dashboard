@@ -116,11 +116,20 @@
   .footer-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:28px;padding-top:16px;border-top:1px solid var(--border);}
   .footer-actions p{color:var(--text-dim);font-size:12px;margin-right:auto;align-self:center;}
 
+  .plan-section{
+    background:#0F1317;
+    border:1px solid var(--danger);
+    border-radius:14px;
+    padding:28px 24px 24px;
+    margin-top:24px;
+  }
+  .plan-section .section-head{margin-top:0;}
+
   .section-head{display:flex;align-items:center;gap:8px;margin:36px 0 14px;}
   .section-head .bar{width:4px;height:16px;border-radius:2px;background:var(--food);}
   .section-head.sport .bar{background:var(--sport);}
   .section-head.habit .bar{background:var(--habit);}
-  .section-head.plan .bar{background:var(--food);}
+  .section-head.plan .bar{background:var(--danger);}
 
   .plan-day-block{background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
   .plan-day-block:last-child{margin-bottom:0;}
@@ -135,6 +144,18 @@
   .history-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
   .history-card h3{margin:0 0 4px;font-size:13px;font-weight:600;}
   .history-card .big{font-size:24px;font-weight:600;font-family:'Space Grotesk',sans-serif;color:var(--food);margin:6px 0 2px;}
+  .section-head.sport + .history-grid .big{color:var(--sport);}
+  .section-head.habit + .history-grid .big{color:var(--habit);}
+  #hist-smoke-longest{color:var(--smoke);}
+  #hist-spanish-streak{color:var(--spanish);}
+  #hist-mood{color:var(--mood);}
+
+  .verlauf-block{border:1px solid var(--border);border-radius:12px;padding:20px 20px 4px;margin-bottom:24px;margin-top:24px;}
+  .verlauf-block:last-child{margin-bottom:0;}
+  .verlauf-block .section-head{margin-top:0;}
+  .verlauf-block.food{border-color:var(--food);}
+  .verlauf-block.sport{border-color:var(--sport);}
+  .verlauf-block.habit{border-color:var(--habit);}
   .history-card .sub{font-size:12px;color:var(--text-dim);}
   .history-card canvas{max-height:200px;margin-top:10px;}
   .trend-down{color:var(--smoke);font-weight:500;}
@@ -407,6 +428,7 @@
 
   </div>
 
+  <div class="verlauf-block food">
   <div class="section-head"><div class="bar"></div><h2>Ernährung — Verlauf</h2></div>
   <div class="history-grid">
     <div class="history-card">
@@ -426,7 +448,9 @@
       <div class="sub" id="hist-burned-sub">Lauf + Workout</div>
     </div>
   </div>
+  </div>
 
+  <div class="verlauf-block sport">
   <div class="section-head sport"><div class="bar"></div><h2>Sport — Verlauf</h2></div>
   <div class="history-grid">
     <div class="history-card">
@@ -487,7 +511,9 @@
       <canvas id="chart-vo2"></canvas>
     </div>
   </div>
+  </div>
 
+  <div class="verlauf-block habit">
   <div class="section-head habit"><div class="bar"></div><h2>Habit-Tracker — Verlauf</h2></div>
   <div class="history-grid">
     <div class="history-card">
@@ -507,12 +533,15 @@
       <canvas id="chart-mood"></canvas>
     </div>
   </div>
+  </div>
 
+  <div class="plan-section">
   <div class="section-head plan"><div class="bar"></div><h2>Trainingsplan</h2></div>
   <div class="history-card" style="padding:18px 20px;">
     <p style="font-size:12px;color:var(--text-dim);margin:0 0 12px;">Gilt als wiederkehrender Wochenplan (Mo–So) und wird für "Heute geplant" und die Wochenübersicht genutzt.</p>
     <div id="plan-editor"></div>
     <button class="primary" style="margin-top:14px;" onclick="saveWeeklyPlan()">Trainingsplan speichern</button>
+  </div>
   </div>
 
   <div class="footer-actions">
