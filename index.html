@@ -70,7 +70,8 @@
     padding:14px 16px;
   }
   .entry-card h4{margin:0 0 10px;font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;}
-  .entry-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+  .entry-row{display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;align-items:flex-end;}
+  .entry-row > button{flex-shrink:0;}
   .entry-row input,.entry-row select{flex:1;min-width:70px;}
   label.mini{display:block;font-size:10px;color:var(--text-dim);margin-bottom:4px;}
 
@@ -87,13 +88,15 @@
   input:focus,select:focus{outline:1px solid var(--text-dim);}
 
   button.primary{
-    background:var(--text);color:var(--bg);border:none;border-radius:6px;
-    padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+    background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:6px;
+    height:32px;padding:0 14px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;
+    display:inline-flex;align-items:center;justify-content:center;
   }
-  button.primary:hover{opacity:.85;}
+  button.primary:hover{background:var(--border);border-color:var(--text-dim);}
   button.chip{
     background:none;border:1px solid var(--border);color:var(--text-dim);
-    border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;
+    border-radius:6px;height:32px;padding:0 12px;font-size:12px;font-weight:400;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
   }
   button.chip:hover{color:var(--text);border-color:var(--text-dim);}
   button.link{background:none;border:none;color:var(--text-dim);font-size:11px;cursor:pointer;text-decoration:underline;padding:2px 0;}
@@ -689,8 +692,8 @@ function renderPlanRowFields(i, p){
   if(p.type==='run'){
     const isInterval = p.trainType==='Intervalle';
     f1.innerHTML = '<label class="mini">Distanz (km)</label><input type="number" step="0.1" id="plan-dist-'+i+'" value="'+(p.dist||'')+'" oninput="updatePlanPace('+i+')"'+(isInterval?' disabled':'')+'>';
-    f2.innerHTML = '<label class="mini">Zeit (min)</label><input type="number" step="0.5" id="plan-time-'+i+'" value="'+(p.time||'')+'" oninput="updatePlanPace('+i+')"'+(isInterval?' disabled':'')+'>'
-      + '<div id="plan-pace-'+i+'" class="mini" style="margin-top:4px;text-transform:none;color:var(--text-dim);"></div>';
+    f2.innerHTML = '<label class="mini">Zeit (min) <span id="plan-pace-'+i+'" style="text-transform:none;color:var(--sport);font-weight:600;"></span></label>'
+      + '<input type="number" step="0.5" id="plan-time-'+i+'" value="'+(p.time||'')+'" oninput="updatePlanPace('+i+')"'+(isInterval?' disabled':'')+'>';
     f3.innerHTML = '<label class="mini">Typ</label><select id="plan-traintype-'+i+'" onchange="toggleIntervalWrap('+i+')">'
       + ['Ausdauerlauf','Intervalle'].map(s=>'<option'+(p.trainType===s?' selected':'')+'>'+s+'</option>').join('')
       + '</select>';
